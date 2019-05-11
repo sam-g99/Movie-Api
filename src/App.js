@@ -17,7 +17,7 @@ class App extends Component {
   return (
     <Router>
       <div className="App">
-      <Navigation/>
+        <Navigation/>
         <Route exact path="/" component={HomePage} />
         <Route path="/soon" component={ComingSoon} />
         <Route path="/popular" component={Popular} />

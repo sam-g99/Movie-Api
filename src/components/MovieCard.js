@@ -22,7 +22,7 @@ componentDidMount() {
   fetch(`https://api.themoviedb.org/3/movie/${this.props.id}/videos?api_key=57440f72713333a308e3c60c8ed75e5c&language=en-US`)
   .then(d => d.json())
   .then(data => {
-    if(data.results !== undefined){
+    if(data.results[0] !== undefined){
       this.setState({src: data.results[0].key})
     }
   })
@@ -37,7 +37,7 @@ render(){
       <img src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2${this.props.image}`} alt="movie poster"/>
       <div className="button-container">
         <Button buttonStyle = 'more' text = 'more...' onClick={() => {this.props.history.push(`/movie/${this.props.id}`)}}/>
-        <Button buttonStyle = 'video' text = 'Trailer' svg = {buttonSvg} onClick={() => {this.props.onSrc(this.state.src)}} />
+        <Button buttonStyle = {(this.state.src === '') ? 'disabled': 'video'} text = {(this.state.src === '') ? 'Unknown': 'Trailer'} svg = {(this.state.src === '') ? '': buttonSvg} onClick={() => {this.props.onSrc(this.state.src)}} />
       </div>
       
     </div>

@@ -13,6 +13,25 @@
   top:60px;
   right:0;
 }
+.loader {
+  position: absolute;
+  top:40%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  animation-delay: 2s;
+  opacity:0;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); opacity: 1}
+  100% { transform: rotate(360deg); opacity: 1}
+}
 html{
   overflow-y: scroll;
 }
@@ -40,6 +59,7 @@ svg{
 .App{
   margin:0 auto;
   max-width: 1200px;
+  min-width: 320px;
   position: relative;
   margin-top:80px;
 }
@@ -130,7 +150,24 @@ nav ul li{
 
 .mobile-nav{
   background:#414442;
-  margin-top:-20px;
+  position: fixed;
+  top:60px;
+  width:100%;
+  z-index:100;
+  transition: height .2s;
+  height: 0px;
+  overflow: hidden;
+}
+.show-nav{
+  height:150px;
+}
+.mobile-nav ul{
+  list-style: none;
+  font-size: 1.5em;
+}
+.mobile-nav li{
+  margin-top:10px;
+  padding:5px;
 }
 .mobile-nav a{
   color:white;
@@ -177,6 +214,19 @@ nav .hamburger div {
   background: white;
   margin: 9px 0;
   transition: transform 0.3s, opacity 0.2s;
+}
+.search-results{
+  margin-top:131px;
+  font-size: 1.2em;
+  position: fixed;
+  z-index:100;
+  background: white;
+  height:100%;
+  width:100%;
+  top:0px;
+}
+.search-results a{
+  color:#20394C;
 }
 .section-title{
   color: #2E2E2E;
@@ -315,6 +365,16 @@ nav .hamburger div {
 }
 .video > .background{
   background: #D64B57;
+}
+.button-container > .disabled{
+  border-color: gray;
+  color:gray;
+}
+.disabled:hover{
+  background: white;
+}
+.disabled:hover span{
+  color:gray;
 }
 .btn:hover{
   color: white;
@@ -508,6 +568,9 @@ nav .hamburger div {
   .main-movie{
     flex-flow: column;
   }
+  .image-container{
+    margin:0 auto;
+  }
   .main-movie img{
     margin:0 auto;
     height: 291px;
@@ -554,13 +617,24 @@ nav .hamburger div {
     width:130px;
   }
   .movie-card > p, h3{
-    margin-left:159px
+    margin-left:159px;
   }
   .movie-card > h3{
     font-size: 1.5em;
     padding:2px;
+    max-height: 63px;
+    overflow: hidden;
   }
   .movie-card > p{
     font-size: 1em;
+  }
+  .description{
+    height: 88px;
+    overflow: hidden;
+  }
+}
+@media only screen and (max-width: 450px) {
+  .movie-card > h3{
+    font-size: 1.1em;
   }
 }

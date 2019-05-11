@@ -7,20 +7,48 @@ export default class  Navigation extends Component {
   state = {
     search: false,
     closed: true,
-    navOpen: false
+    navOpen: false,
+    queryResults: ''
   }
+  componentDidMount(){
+    window.addEventListener('resize', ()=>{
+      const width = window.innerWidth;
+      if(width > 850){
+        this.setState({navOpen: false})
+      } 
+    })
+  }
+  searchMovies = (e) => {
+    if(e.target.value === ''){
+      this.setState({queryResults: ''})
+      return;
+    }
+    fetch(`https://api.themoviedb.org/3/search/movie?api_key=57440f72713333a308e3c60c8ed75e5c&language=en-US&query=${e.target.value}&page=1&include_adult=false`)
+    .then(d => d.json())
+    .then(search => {
+     const queryResults = search.results.map((movie) => {
+        return (
+          <div>
+            <a href={`/movie/${movie.id}`}> {movie.title}</a>
+          </div>
+        )
+      })
+      this.setState({queryResults: queryResults})
+      console.log(this.state.queryResults)
+    })
+  } 
   toggleNav = () => {
-    this.setState(prevState => ({navOpen : !prevState.navOpen}))
+    this.setState(prevState => ({navOpen : !prevState.navOpen, search : false, queryResults: ''}))
   }
   searching = () => {
     if(this.state.search){
       setTimeout(() =>{this.setState({closed: true})}, 300)
+      this.setState({queryResults: ''})
+      this.Search.value = '';
     }else{
       this.setState({closed: false})
     }
     this.setState(prevState => ({search: !prevState.search}))
-    
-    
   }
   render(){
     return (
@@ -45,14 +73,18 @@ export default class  Navigation extends Component {
           {searchIconSvg}
           {closeIconSvg}
           </div>
-          <input type="text" placeholder="Hey there search some movies!" onKeyUp={() => {}}></input>
+          <input type="text" ref={input => {this.Search = input}} placeholder="Hey there search some movies!" onKeyUp={this.searchMovies}></input>
           <div className={`hamburger ${(this.state.navOpen) ? 'close' : ''}`} onClick={this.toggleNav}id="hamburger">
             <div></div>
             <div></div>
             <div></div>
         </div>
       </nav>
-      <div className={`mobile-nav ${(this.state.navOpen) ? '' : 'hide'}`}>
+      <div className={`search-results ${(this.state.queryResults !== '') ? '': 'hide'}`}>
+        {this.state.queryResults}
+      </div>
+      
+      <div className={`mobile-nav ${(this.state.navOpen) ? 'show-nav' : ''}`}>
       <ul>
             {links.map(({name, href}, i) => {
               return(

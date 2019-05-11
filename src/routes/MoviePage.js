@@ -12,7 +12,7 @@ class MoviePage extends Component {
     youtubeSrc:'',
     trailerSrc: '',
     loading: true,
-    img: 'http://via.placeholder.com/300x450'
+    img: ''
   }
   toggleSrc = (src) => { 
     if(this.state.trailerSrc === ''){
@@ -54,8 +54,11 @@ class MoviePage extends Component {
             </div>
           )})
           const mainImage =  `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`
-            
-      this.setState({movieData: movie, topBilledCast:topBilledCast, recommend: recommendation, youtubeSrc: video.results[0].key, img: mainImage,loading: false});
+          let key = '';
+          if(video.results[0] !== undefined){
+            key = video.results[0].key
+          }
+      this.setState({movieData: movie, topBilledCast:topBilledCast, recommend: recommendation, youtubeSrc: key, img: mainImage,loading: false});
     })
   }
 
@@ -71,7 +74,10 @@ class MoviePage extends Component {
         close = {this.toggleSrc}
       />
       <div className="main-movie">
-     <img src={this.state.img} alt="movie poster"/>
+      <div className="image-container">
+      <img src={this.state.img} alt="movie poster"/>
+      </div>
+     
       <div className="info">
       <h1>
         {movie.title}
@@ -79,7 +85,7 @@ class MoviePage extends Component {
         <p className="release">Theatrical Release - {moment(movie.release_date).format('MMMM Do YYYY') }</p>
         <p className="main-description">{movie.overview}</p>
         <div  className="button-container">
-          <Button buttonStyle = 'video' text = 'Play Trailer' svg = {buttonSvg} onClick={() => {this.toggleSrc(this.state.youtubeSrc)}} />
+          <Button buttonStyle = {(this.state.youtubeSrc === '') ? 'disabled': 'video'} text = {(this.state.youtubeSrc === '') ? 'No Trailer': 'Play Trailer'} svg = {(this.state.youtubeSrc === '') ? '': buttonSvg} onClick={() => {this.toggleSrc(this.state.youtubeSrc)}} />
         </div>
         <div className="movie-main-info">
           <div className="row">
