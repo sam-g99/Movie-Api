@@ -4,6 +4,15 @@
   font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
 }
+.loading{
+  position: fixed;
+  background: rgb(255, 255, 255);
+  width:100vw;
+  height:100%;
+  z-index: 100;
+  top:60px;
+  right:0;
+}
 html{
   overflow-y: scroll;
 }
@@ -370,6 +379,7 @@ nav .hamburger div {
   border-radius: 10px;
 }
 .main-movie img{
+  margin:0;
   height: 450px;
   width: 300px;
 }

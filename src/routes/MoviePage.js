@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import moment from 'moment'
 import Button from '../components/Button'
 import Trailer from '../components/Trailer'
+import Loading from '../components/Loading'
 class MoviePage extends Component {
   state = {
     movieData: {},
@@ -10,6 +11,8 @@ class MoviePage extends Component {
     recommended: {},
     youtubeSrc:'',
     trailerSrc: '',
+    loading: true,
+    img: 'http://via.placeholder.com/300x450'
   }
   toggleSrc = (src) => { 
     if(this.state.trailerSrc === ''){
@@ -20,6 +23,7 @@ class MoviePage extends Component {
     
   }
   componentDidMount() {
+    window.scrollTo(0,0)
     const movieData = fetch(`https://api.themoviedb.org/3/movie/${this.props.match.params.id}?api_key=57440f72713333a308e3c60c8ed75e5c&language=en-US`)
     const castData  = fetch(`https://api.themoviedb.org/3/movie/${this.props.match.params.id}/credits?api_key=57440f72713333a308e3c60c8ed75e5c&language=en-US`)
     const recommended = fetch(`https://api.themoviedb.org/3/movie/${this.props.match.params.id}/recommendations?api_key=57440f72713333a308e3c60c8ed75e5c&language=en-US`)
@@ -49,8 +53,9 @@ class MoviePage extends Component {
               <h2>{title}</h2>
             </div>
           )})
+          const mainImage =  `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`
             
-      this.setState({movieData: movie, topBilledCast:topBilledCast, recommend: recommendation, youtubeSrc: video.results[0].key});
+      this.setState({movieData: movie, topBilledCast:topBilledCast, recommend: recommendation, youtubeSrc: video.results[0].key, img: mainImage,loading: false});
     })
   }
 
@@ -58,12 +63,15 @@ class MoviePage extends Component {
     const movie= this.state.movieData;
     return (
       <div className="movie-page-container">
+            <Loading
+                loading = {this.state.loading}
+            />
       <Trailer
         src = {this.state.trailerSrc}
         close = {this.toggleSrc}
       />
       <div className="main-movie">
-      <img src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`} alt="movie poster"/>
+     <img src={this.state.img} alt="movie poster"/>
       <div className="info">
       <h1>
         {movie.title}

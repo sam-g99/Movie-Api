@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import MovieCard from  './MovieCard'
 import Trailer from './Trailer'
+import Loading from './Loading'
 export default class Home extends Component {
     state = {
         moviesInTheaters: null,
         trailerSrc: '',
+        loading: true
     }
     showTrailer = (src) => {
         this.setState({trailerSrc: src})
@@ -40,12 +42,15 @@ export default class Home extends Component {
                     />
                 )
             })
-            this.setState({moviesInTheaters: moviesInTheaters})
+            this.setState({moviesInTheaters: moviesInTheaters, loading: false})
         })
     }
   render() {
     return (
         <div>
+            <Loading
+                loading = {this.state.loading}
+            />
             <Trailer 
                 src = {this.state.trailerSrc}
                 close = {this.closeTrailer}

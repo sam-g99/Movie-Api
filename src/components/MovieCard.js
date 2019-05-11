@@ -22,7 +22,7 @@ componentDidMount() {
   fetch(`https://api.themoviedb.org/3/movie/${this.props.id}/videos?api_key=57440f72713333a308e3c60c8ed75e5c&language=en-US`)
   .then(d => d.json())
   .then(data => {
-    if(data.results[0] !== undefined){
+    if(data.results !== undefined){
       this.setState({src: data.results[0].key})
     }
   })
