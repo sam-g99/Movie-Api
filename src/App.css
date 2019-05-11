@@ -67,6 +67,8 @@ svg{
   position: absolute;
   font-family: 'Just Another Hand', cursive;
   font-size: 3em;
+  top:50%;
+  transform: translateY(-50%)
 }
 .date{
   font-family: 'Just Another Hand', cursive;
