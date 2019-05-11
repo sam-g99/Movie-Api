@@ -218,7 +218,7 @@ nav .hamburger div {
   transition: transform 0.3s, opacity 0.2s;
 }
 .search-results{
-  margin-top:131px;
+  margin-top:130px;
   font-size: 1.2em;
   position: fixed;
   z-index:100;
