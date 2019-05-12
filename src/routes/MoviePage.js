@@ -59,6 +59,9 @@ class MoviePage extends Component {
             key = video.results[0].key
           }
       this.setState({movieData: movie, topBilledCast:topBilledCast, recommend: recommendation, youtubeSrc: key, img: mainImage,loading: false});
+    }).catch(()=>{
+      console.log('error')
+      setTimeout(() => {window.location.reload()}, 2000);
     })
   }
 
