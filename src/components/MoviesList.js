@@ -30,7 +30,7 @@ export default class Home extends Component {
                 moviesInTheaters.push(r);
             })
 
-            moviesInTheaters = moviesInTheaters.map((movie) => {
+            moviesInTheaters = moviesInTheaters.slice(0,10).map((movie) => {
                 return (
                     <MovieCard 
                         title={movie.title} 

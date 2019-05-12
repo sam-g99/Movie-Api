@@ -35,8 +35,8 @@ render(){
       <p>{moment(this.props.released).format('MMMM Do YYYY')}</p>
       <p className="description">{this.descriptionShortener(this.props.description)}</p>
       <img src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2${this.props.image}`} alt="movie poster"/>
-      <div className="button-container">
-        <Button buttonStyle = 'more' text = 'more...' onClick={() => {window.location.href =`/movie/${this.props.id}`}}/>
+      <div className="button-container">  
+        <Button buttonStyle = 'more' text = 'more...' onClick={() => {this.props.history.push(`/movie/${this.props.id}`)}}/>
         <Button buttonStyle = {(this.state.src === '') ? 'disabled': 'video'} text = {(this.state.src === '') ? 'Unknown': 'Trailer'} svg = {(this.state.src === '') ? '': buttonSvg} onClick={() => {this.props.onSrc(this.state.src)}} />
       </div>
       

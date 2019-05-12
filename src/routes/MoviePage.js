@@ -27,12 +27,12 @@ class MoviePage extends Component {
     const movieData = fetch(`https://api.themoviedb.org/3/movie/${this.props.match.params.id}?api_key=57440f72713333a308e3c60c8ed75e5c&language=en-US`)
     const castData  = fetch(`https://api.themoviedb.org/3/movie/${this.props.match.params.id}/credits?api_key=57440f72713333a308e3c60c8ed75e5c&language=en-US`)
     const recommended = fetch(`https://api.themoviedb.org/3/movie/${this.props.match.params.id}/recommendations?api_key=57440f72713333a308e3c60c8ed75e5c&language=en-US`)
-    const video = fetch(`https://api.themoviedb.org/3/movie/${this.props.match.params.id}/videos?api_key=57440f72713333a308e3c60c8ed75e5c&language=en-US`)
+    const video = `https://api.themoviedb.org/3/movie/${this.props.match.params.id}/videos?api_key=57440f72713333a308e3c60c8ed75e5c&language=en-US`
     Promise.all([
       movieData.then(d => d.json()),
       castData.then(d => d.json()),
       recommended.then(d => d.json()),
-      video.then(d => d.json())
+      fetch(video).then(d => d.json())
     ]).then(([movie, cast, recommended, video]) => { 
       const topBilledCast = cast.cast.slice(0, 4).map(({character, name/*actor name*/, profile_path}, i) => {
         return (
@@ -59,9 +59,6 @@ class MoviePage extends Component {
             key = video.results[0].key
           }
       this.setState({movieData: movie, topBilledCast:topBilledCast, recommend: recommendation, youtubeSrc: key, img: mainImage,loading: false});
-    }).catch(()=>{
-      console.log('error')
-      setTimeout(() => {window.location.reload()}, 2000);
     })
   }
 
