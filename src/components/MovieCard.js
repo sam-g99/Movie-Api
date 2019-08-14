@@ -7,10 +7,10 @@ class MovieCard extends Component {
     src: '',
   }
 descriptionShortener = (d) => {
-  if(d.length < 150){
+  if(d.length < 100){
     return d
   }
-  return d.replace(/^(.{150}[^\s]*).*/, "$1") + '...';
+  return d.replace(/^(.{100}[^\s]*).*/, "$1") + '...';
 }
 titleShortener = (d) => {
   if(d.replace(/\s+/g, '').length <= 30){
