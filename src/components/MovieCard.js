@@ -12,7 +12,7 @@ descriptionShortener = (d) => {
   }
   const shortDesc = d.replace(/^(.{100}[^\s]*).*/, "$1") + '...';
   if(shortDesc.length > 150){
-    return d.replace(/^(.{30}[^\s]*).*/, "$1") + '...';
+    return d.replace(/^(.{20}[^\s]*).*/, "$1") + '...';
   }else{
     return shortDesc;
   }
