@@ -158,8 +158,8 @@ nav ul li {
 }
 
 .mobile-nav {
-	background: #2f2f2f;
 	position: fixed;
+	background: #2f2f2f;
 	top: 60px;
 	width: 100%;
 	z-index: 100;
