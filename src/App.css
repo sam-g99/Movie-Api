@@ -330,13 +330,27 @@ h3 {
 	align-items: center;
 	justify-content: center;
 	border: 1px solid #c2c2c2;
-	background: rgba(255, 255, 255, 0);
+	background: #282828;
 	cursor: pointer;
 	overflow: hidden;
 	position: relative;
 	transition: color 0.2s, background-color 0.2s;
 }
-
+@media only screen and (max-width: 1170px) {
+	.movie-card > .button-container {
+		width: auto;
+		margin-right: 10px;
+	}
+	.button-container > .btn {
+		width: 146px;
+		font-size: 18px;
+	}
+}
+@media only screen and (max-width: 1070px) {
+	.button-container > .btn {
+		width: 126px;
+	}
+}
 .movie-card .button-container > .btn:last-of-type {
 	float: right;
 }
@@ -577,6 +591,14 @@ iframe {
 		font-size: 1.7vw;
 	}
 }
+@media only screen and (max-width: 1170px) {
+	.movie-card > .button-container {
+		right: 0px;
+	}
+	.video > svg {
+		right: 9px;
+	}
+}
 @media only screen and (max-width: 1000px) {
 	.movie-card > img {
 		width: 159px;
@@ -589,12 +611,17 @@ iframe {
 		width: 90%;
 		left: 50%;
 		transform: translateX(-50%);
+		margin-top: 10px;
+		max-width: 500px;
 	}
 	.movie-card .button-container > .btn {
 		width: 48%;
 	}
 	.btn > .background {
 		transform: translateX(-230px);
+	}
+	.movies-container > .movie-card {
+		height: 305px;
 	}
 }
 @media only screen and (max-width: 850px) {
@@ -642,7 +669,6 @@ iframe {
 	}
 	.movies-container > .movie-card {
 		flex: initial;
-		height: 290px;
 	}
 	.movie-card > h3 {
 		font-size: 3.8vw;
@@ -654,7 +680,7 @@ iframe {
 }
 @media only screen and (max-width: 700px) {
 	.movies-container > .movie-card {
-		height: 245px;
+		height: 265px;
 	}
 	.movie-card > img {
 		width: 130px;
@@ -673,7 +699,7 @@ iframe {
 		font-size: 1em;
 	}
 	.description {
-		height: 88px;
+		height: 119px;
 		overflow: hidden;
 	}
 }
