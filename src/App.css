@@ -469,14 +469,14 @@ iframe {
 .close-trailer div {
 	width: 40px;
 	height: 5px;
-	background: rotate(-51deg) translateX(-1px);
+	background: rgb(231, 231, 231);
 	border-radius: 5px;
 }
 .close-trailer div:first-of-type {
 	transform: rotate(48deg) translateX(5px) translateY(5px);
 }
 .close-trailer div:last-of-type {
-	transform: rotate(-50deg);
+	transform: rotate(-51deg) translateX(-1px);
 }
 .hide {
 	display: none;
