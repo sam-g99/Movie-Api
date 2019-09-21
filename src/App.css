@@ -284,6 +284,8 @@ h3 {
 .movie-card > h3 {
 	color: #ffffff;
 	font-size: 1.5em;
+	font-family: roboto;
+	font-weight: 500;
 
 	margin-top: 8px;
 }
